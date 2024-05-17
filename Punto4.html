@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Imágenes con Navegación</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .gallery-container {
+            position: relative;
+            width: 60%;
+            max-width: 800px;
+        }
+        .gallery-container img {
+            width: 100%;
+            display: none;
+        }
+        .gallery-container img.active {
+            display: block;
+        }
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .prev-button {
+            left: 0;
+        }
+        .next-button {
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery-container">
+        <img src="imagenes/baires.jpg" alt="Imagen 1" class="active">
+        <img src="imagenes/cordoba.jpg" alt="Imagen 2">
+        <img src="imagenes/neuquen.jpg" alt="Imagen 3">
+        <img src="imagenes/bariloche.jpeg" alt="Imagen 4">
+        <img src="imagenes/cataratas.jpg" alt="Imagen 5">
+        <img src="imagenes/mendoza.jpg" alt="Imagen 6">
+        <img src="imagenes/ushuaia.jpeg" alt="Imagen 7">
+        <button class="nav-button prev-button" onclick="showPrevImage()">Anterior</button>
+        <button class="nav-button next-button" onclick="showNextImage()">Siguiente</button>
+    </div>
+
+    <script>
+        let currentImageIndex = 0;
+        const images = document.querySelectorAll('.gallery-container img');
+
+        function showImage(index) {
+            images.forEach((img, i) => {
+                img.classList.toggle('active', i === index);
+            });
+        }
+
+        function showPrevImage() {
+            currentImageIndex = (currentImageIndex > 0) ? currentImageIndex - 1 : images.length - 1;
+            showImage(currentImageIndex);
+        }
+
+        function showNextImage() {
+            currentImageIndex = (currentImageIndex < images.length - 1) ? currentImageIndex + 1 : 0;
+            showImage(currentImageIndex);
+        }
+    </script>
+</body>
+</html>
